@@ -41,7 +41,7 @@ namespace QRCoder
 
         public string GetGraphic(Size viewBox, string darkColorHex, string lightColorHex, bool drawQuietZones = true)
         {
-            var svgFile = new StringBuilder(@"<svg version=""1.1"" baseProfile=""full"" shape-rendering=""crispEdges"" width=""" +viewBox.Width+ @""" height="""+viewBox.Height+ @""" xmlns=""http://www.w3.org/2000/svg"">");
+            var svgFile = new StringBuilder(@"<svg version=""1.1"" baseProfile=""full"" shape-rendering=""crispEdges"" viewBox=""0 0 " + viewBox.Width+ @" " + viewBox.Height + @""" xmlns=""http://www.w3.org/2000/svg"">");
             var drawableModulesCount = this.QrCodeData.ModuleMatrix.Count - (drawQuietZones ? 0 : 8);
             var unitsPerModule = Math.Round(Convert.ToDouble(Math.Min(viewBox.Width, viewBox.Height)) / drawableModulesCount,4);
             if (unitsPerModule * drawableModulesCount > viewBox.Width)
