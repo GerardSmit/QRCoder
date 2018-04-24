@@ -282,13 +282,7 @@ namespace QRCoder
                 var patternScore = 0;
 
                 var size = qrCode.ModuleMatrix.Count;
-
-              
-                #if NET40
-                    var methods = typeof (MaskPattern).GetMethods();
-                #else
-                    var methods = typeof (MaskPattern).GetTypeInfo().DeclaredMethods;
-                #endif
+                var methods = typeof(MaskPattern).GetMethods();
 
                 foreach (var pattern in methods)
                 {
@@ -333,13 +327,7 @@ namespace QRCoder
                     }
                 }
 
-
-
-                #if NET40
-                    var patterMethod = typeof(MaskPattern).GetMethods().First(x => x.Name == patternName);
-                #else
-                    var patterMethod = typeof(MaskPattern).GetTypeInfo().GetDeclaredMethod(patternName);
-                #endif
+                var patterMethod = typeof(MaskPattern).GetTypeInfo().GetDeclaredMethod(patternName);
 
 
                 for (var x = 0; x < size; x++)

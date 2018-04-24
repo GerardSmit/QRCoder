@@ -840,13 +840,8 @@ namespace QRCoder
                         throw new SwissQrCodeContactException($"City name must match the following pattern as defined in pain.001: {charsetPattern}");
                     this.city = city;
 
-#if NET40
                     if (!CultureInfo.GetCultures(CultureTypes.SpecificCultures).Where(x => new RegionInfo(x.LCID).TwoLetterISORegionName.ToUpper() == country.ToUpper()).Any())
                         throw new SwissQrCodeContactException("Country must be a valid \"two letter\" country code as defined by  ISO 3166-1, but it isn't.");
-#else
-                    try { var cultureCheck = new CultureInfo(country.ToUpper()); }
-                    catch { throw new SwissQrCodeContactException("Country must be a valid \"two letter\" country code as defined by  ISO 3166-1, but it isn't."); }
-#endif
                    
                     this.country = country;
                 }
@@ -2097,11 +2092,7 @@ namespace QRCoder
             Encoding utf8 = Encoding.UTF8;
             byte[] utfBytes = utf8.GetBytes(message);
             byte[] isoBytes = Encoding.Convert(utf8, iso, utfBytes);
-#if NET40
             return iso.GetString(isoBytes);
-#else
-                return iso.GetString(isoBytes,0, isoBytes.Length);
-#endif
         }
 
         private static string EscapeInput(string inp, bool simple = false)

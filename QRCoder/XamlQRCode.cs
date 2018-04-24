@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NET45
+using System;
 using System.Windows;
 using System.Windows.Media;
 
@@ -68,3 +69,4 @@ namespace QRCoder
         }
     }
 }
+#endif
